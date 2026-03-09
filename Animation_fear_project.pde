@@ -1,9 +1,10 @@
 //Animation fear
 //stock market crash
-int x, y, vx, vy, xx, xy, z, g;
+int x, y, vx, vy, xx, xy, z, g, counter, blink;
 void setup() {
+  counter = 0;
+  blink = 0;
   size(600, 600);
-  PImage photo;
   xx = 300;
   xy = 0;
   x = 200;
@@ -17,8 +18,22 @@ void setup() {
 
 void draw() {
   xy += 5;
+  counter = counter + 5;
   background (255);
-  image(loadImage("apple logo.jpg"), 300, 125, 100, 100);
+  if (counter < 100) {
+    if (blink != 100) {
+      image(loadImage("apple logo.jpg"), 300, 125, 100, 100);
+    }
+  }
+  if (counter == 150) {
+    if (blink != 100) {
+      counter = 0;
+      blink += 1;
+    }
+  }
+  if (blink == 7) {
+    blink = 100;
+  }
   stroke(#FF3131);
   line(420, 380, 500, 500);
   line(0, y, 200, 380);
